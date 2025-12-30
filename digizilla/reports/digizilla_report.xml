@@ -1,0 +1,9 @@
+<odoo>
+    <report
+        id="digizilla_report"
+        model="digizilla.digizilla"
+        string="Digizilla PDF"
+        report_type="qweb-pdf"
+        name="digizilla.report_template"
+        file="digizilla.report_template"/>
+</odoo>

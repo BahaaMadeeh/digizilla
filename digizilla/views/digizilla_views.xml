@@ -1,0 +1,37 @@
+<odoo>
+    <record id="view_digizilla_form" model="ir.ui.view">
+        <field name="name">digizilla.form</field>
+        <field name="model">digizilla.digizilla</field>
+        <field name="arch" type="xml">
+            <form js_class="hide_create">
+                <header>
+                    <button name="action_print_pdf" string="Print PDF" type="object" class="btn-primary"/>
+                    <button name="action_save_pdf" string="Save PDF" type="object" class="btn-secondary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="gender"/>
+                        <field name="country_id"/>
+                        <field name="joining_date"/>
+                        <field name="tag_ids" widget="many2many_tags"/>
+                        <field name="customer_ids" widget="many2many_tags"/>
+                        <field name="company_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Notes">
+                            <field name="notes"/>
+                        </page>
+                        <page string="Comments">
+                            <field name="comments"/>
+                        </page>
+                    </notebook>
+                    <group>
+                        <field name="pdf_file" filename="pdf_filename" widget="download"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,16 +1,89 @@
 <odoo>
-    <template id="report_template">
+    <!-- QWeb PDF Template -->
+    <template id="digizilla_report_template">
         <t t-call="web.external_layout">
-            <div class="page">
-                <h2>Digizilla Report</h2>
-                <p><strong>Name:</strong> <span t-field="doc.name"/></p>
-                <p><strong>Gender:</strong> <span t-field="doc.gender"/></p>
-                <p><strong>Country:</strong> <span t-field="doc.country_id.name"/></p>
-                <p><strong>Joining Date:</strong> <span t-field="doc.joining_date"/></p>
-                <p><strong>Company:</strong> <span t-field="doc.company_id.name"/></p>
-                <p><strong>Notes:</strong> <span t-field="doc.notes"/></p>
-                <p><strong>Comments:</strong> <span t-field="doc.comments"/></p>
-            </div>
+            <t t-set="doc" t-value="docs[0]"/>
+
+            <!-- main is required for web.external_layout -->
+            <main>
+                <div class="page">
+                    <h2>
+                        Digizilla Record:
+                        <t t-esc="doc.name or 'N/A'"/>
+                    </h2>
+
+                    <table class="table table-condensed">
+                        <tr>
+                            <th>Name</th>
+                            <td><t t-esc="doc.name or 'N/A'"/></td>
+                        </tr>
+
+                        <tr>
+                            <th>Gender</th>
+                            <td><t t-esc="doc.gender or 'N/A'"/></td>
+                        </tr>
+
+                        <tr>
+                            <th>Country</th>
+                            <td>
+                                <t t-if="doc.country_id">
+                                    <t t-esc="doc.country_id.name"/>
+                                </t>
+                                <t t-else="">N/A</t>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Joining Date</th>
+                            <td><t t-esc="doc.joining_date or 'N/A'"/></td>
+                        </tr>
+
+                        <tr>
+                            <th>Company</th>
+                            <td>
+                                <t t-if="doc.company_id">
+                                    <t t-esc="doc.company_id.name"/>
+                                </t>
+                                <t t-else="">N/A</t>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Tags</th>
+                            <td>
+                                <t t-if="doc.tags">
+                                    <t t-foreach="doc.tags" t-as="tag">
+                                        <span>
+                                            <t t-esc="tag.name"/>
+                                            <t t-if="not loop.last">, </t>
+                                        </span>
+                                    </t>
+                                </t>
+                                <t t-else="">N/A</t>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Notes</th>
+                            <td><t t-esc="doc.notes or 'N/A'"/></td>
+                        </tr>
+
+                        <tr>
+                            <th>Comments</th>
+                            <td><t t-esc="doc.comments or 'N/A'"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </main>
         </t>
     </template>
+
+    <!-- Report Action -->
+    <record id="action_digizilla_report" model="ir.actions.report">
+        <field name="name">Digizilla Report</field>
+        <field name="model">digizilla.record</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">digizilla.digizilla_report_template</field>
+        <field name="print_report_name">'Digizilla - %s' % (object.name or "N/A")</field>
+    </record>
 </odoo>

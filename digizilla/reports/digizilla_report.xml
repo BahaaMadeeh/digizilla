@@ -1,9 +1,33 @@
 <odoo>
     <report
         id="digizilla_report"
-        model="digizilla.digizilla"
-        string="Digizilla PDF"
+        model="digizilla.record"
+        string="Digizilla Record"
         report_type="qweb-pdf"
-        name="digizilla.report_template"
-        file="digizilla.report_template"/>
+        name="digizilla.digizilla_template"
+        file="digizilla.digizilla_template"
+    />
+
+    <template id="digizilla_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <h2>Digizilla Record: <t t-esc="doc.name"/></h2>
+                    <p>Gender: <t t-esc="doc.gender"/></p>
+                    <p>Country: <t t-esc="doc.country_id.name"/></p>
+                    <p>Joining Date: <t t-esc="doc.joining_date"/></p>
+                    <p>Notes: <t t-esc="doc.notes"/></p>
+                    <p>Comments: <t t-esc="doc.comments"/></p>
+                </div>
+            </t>
+        </t>
+    </template>
+    <!-- Report Action -->
+    <record id="action_digizilla_report" model="ir.actions.report">
+        <field name="name">Digizilla Report</field>
+        <field name="model">digizilla.record</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">digizilla.digizilla_report_template</field>
+        <field name="print_report_name">'Digizilla - %s' % (object.name)</field>
+    </record>
 </odoo>

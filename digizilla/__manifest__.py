@@ -1,19 +1,23 @@
 {
-    'name': 'Digizilla Management',
+    'name': 'Digizilla Records',
     'version': '1.0',
-    'category': 'Custom',
-    'summary': 'Manage Digizilla records',
-    'depends': ['base', 'mail', 'contacts'],
+    'summary': 'Manage Digizilla members',
+    'description': 'Complete Digizilla module with kanban, tree, form and PDF report',
+    'author': 'Bahaa Madeeh',
+    'category': 'Tools',
+    'depends': ['base', 'mail', 'web'],
     'data': [
         'security/ir.model.access.csv',
+        'views/digizilla_menus.xml',
         'views/digizilla_views.xml',
+        'reports/digizilla_report_template.xml',
         'reports/digizilla_report.xml',
-        'reports/digizilla_report_template.xml'
     ],
     'assets': {
         'web.assets_backend': [
-            'digizilla/static/src/js/hide_create.js'
-        ]
+            'digizilla/static/src/js/hide_create_button.js',
+        ],
     },
-    'application': True
+    'installable': True,
+    'application': True,
 }

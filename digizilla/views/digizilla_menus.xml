@@ -1,0 +1,19 @@
+<odoo>
+    <!-- Action -->
+    <record id="action_digizilla_records" model="ir.actions.act_window">
+        <field name="name">Digizilla Records</field>
+        <field name="res_model">digizilla.record</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help">Create and manage Digizilla Records.</field>
+    </record>
+     <!-- Menu -->
+    <menuitem id="menu_digizilla_root" name="Digizilla"/>
+
+    <menuitem id="menu_digizilla_records" name="Records" parent="menu_digizilla_root" action="action_digizilla_records"/>
+
+    
+    <!-- RECORDS MENU -->
+    <menuitem id="menu_digizilla_records" name="Records" parent="menu_digizilla_root" action="action_digizilla_records"/>
+
+
+</odoo>

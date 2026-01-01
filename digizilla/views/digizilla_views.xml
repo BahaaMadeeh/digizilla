@@ -1,23 +1,80 @@
 <odoo>
-    <record id="view_digizilla_form" model="ir.ui.view">
-        <field name="name">digizilla.form</field>
-        <field name="model">digizilla.digizilla</field>
+    <!-- Kanban View -->
+    <record id="view_kanban_digizilla" model="ir.ui.view">
+        <field name="name">digizilla.kanban</field>
+        <field name="model">digizilla.record</field>
         <field name="arch" type="xml">
-            <form js_class="hide_create">
+            <kanban>
+                <field name="name"/>
+                <field name="gender"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <field name="name"/>
+                            <div>
+                                <field name="gender"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="view_tree_digizilla" model="ir.ui.view">
+        <field name="name">digizilla.tree</field>
+        <field name="model">digizilla.record</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="gender"/>
+                <field name="country_id"/>
+                <field name="joining_date"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_form_digizilla" model="ir.ui.view">
+        <field name="name">digizilla.form</field>
+        <field name="model">digizilla.record</field>
+        <field name="arch" type="xml">
+            <form string="Digizilla Record">
                 <header>
-                    <button name="action_print_pdf" string="Print PDF" type="object" class="btn-primary"/>
-                    <button name="action_save_pdf" string="Save PDF" type="object" class="btn-secondary"/>
+                    <button
+                        type="object"
+                        name="action_print_pdf"
+                        string="Print PDF"
+                        class="btn-primary"
+                        icon="fa fa-file-pdf-o"/>
                 </header>
+
                 <sheet>
                     <group>
                         <field name="name"/>
                         <field name="gender"/>
-                        <field name="country_id"/>
+
+                        <!-- Country: ONLY res.country records -->
+                        <field
+                            name="country_id"
+                            options="{'no_create': True, 'no_open': True}"
+                            context="{'search_default_country': 1}"
+                        />
+
                         <field name="joining_date"/>
-                        <field name="tag_ids" widget="many2many_tags"/>
-                        <field name="customer_ids" widget="many2many_tags"/>
+
+                        <!-- Tags: ONLY digizilla.tag records, NO free text -->
+                        <field
+                            name="tags"
+                            widget="many2many_tags"
+                            options="{'no_create': True, 'no_open': True}"
+                        />
+
                         <field name="company_id"/>
                     </group>
+
                     <notebook>
                         <page string="Notes">
                             <field name="notes"/>
@@ -26,11 +83,12 @@
                             <field name="comments"/>
                         </page>
                     </notebook>
-                    <group>
-                        <field name="pdf_file" filename="pdf_filename" widget="download"/>
-                    </group>
+
+                    <div class="oe_chatter">
+                        <field name="message_ids"/>
+                        <field name="activity_ids"/>
+                    </div>
                 </sheet>
-                <chatter/>
             </form>
         </field>
     </record>

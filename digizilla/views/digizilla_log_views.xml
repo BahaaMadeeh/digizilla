@@ -1,0 +1,42 @@
+<odoo>
+    <record id="view_tree_digizilla_log" model="ir.ui.view">
+        <field name="name">digizilla.log.tree</field>
+        <field name="model">digizilla.log</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+                <field name="user_id"/>
+                <field name="name"/>
+                <field name="note"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_form_digizilla_log" model="ir.ui.view">
+        <field name="name">digizilla.log.form</field>
+        <field name="model">digizilla.log</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                        <field name="user_id"/>
+                        <field name="name"/>
+                        <field name="note"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_digizilla_log" model="ir.actions.act_window">
+        <field name="name">Log</field>
+        <field name="res_model">digizilla.log</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create log entries automatically.
+            </p>
+        </field>
+    </record>
+</odoo>

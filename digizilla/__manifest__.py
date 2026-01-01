@@ -8,10 +8,11 @@
     'depends': ['base', 'mail', 'web'],
     'data': [
         'security/ir.model.access.csv',
-        'views/digizilla_menus.xml',
         'views/digizilla_views.xml',
+        'views/digizilla_menus.xml',
         'reports/digizilla_report_template.xml',
         'reports/digizilla_report.xml',
+        
     ],
     'assets': {
         'web.assets_backend': [

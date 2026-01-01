@@ -4,16 +4,14 @@
         <field name="name">digizilla.kanban</field>
         <field name="model">digizilla.record</field>
         <field name="arch" type="xml">
-            <kanban>
+            <kanban Create="false">
                 <field name="name"/>
                 <field name="gender"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
                             <field name="name"/>
-                            <div>
-                                <field name="gender"/>
-                            </div>
+                            <div><field name="gender"/></div>
                         </div>
                     </t>
                 </templates>
@@ -26,7 +24,7 @@
         <field name="name">digizilla.tree</field>
         <field name="model">digizilla.record</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree create = "false">
                 <field name="name"/>
                 <field name="gender"/>
                 <field name="country_id"/>
@@ -43,38 +41,17 @@
         <field name="arch" type="xml">
             <form string="Digizilla Record">
                 <header>
-                    <button
-                        type="object"
-                        name="action_print_pdf"
-                        string="Print PDF"
-                        class="btn-primary"
-                        icon="fa fa-file-pdf-o"/>
+                    <button type="object" name="action_print_pdf" string="Print PDF" class="btn-primary" icon="fa fa-file-pdf-o"/>
                 </header>
-
                 <sheet>
                     <group>
                         <field name="name"/>
                         <field name="gender"/>
-
-                        <!-- Country: ONLY res.country records -->
-                        <field
-                            name="country_id"
-                            options="{'no_create': True, 'no_open': True}"
-                            context="{'search_default_country': 1}"
-                        />
-
+                        <field name="country_id" options="{'no_create': True}"/>
                         <field name="joining_date"/>
-
-                        <!-- Tags: ONLY digizilla.tag records, NO free text -->
-                        <field
-                            name="tags"
-                            widget="many2many_tags"
-                            options="{'no_create': True, 'no_open': True}"
-                        />
-
+                        <field name="tags" widget="many2many_tags"/>
                         <field name="company_id"/>
                     </group>
-
                     <notebook>
                         <page string="Notes">
                             <field name="notes"/>
@@ -83,13 +60,24 @@
                             <field name="comments"/>
                         </page>
                     </notebook>
-
                     <div class="oe_chatter">
                         <field name="message_ids"/>
-                        <field name="activity_ids"/>
                     </div>
                 </sheet>
             </form>
+        </field>
+    </record>
+    <!-- Logs Tree View -->
+    <record id="view_tree_digizilla_log" model="ir.ui.view">
+        <field name="name">digizilla.log.tree</field>
+        <field name="model">digizilla.log</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="record_id"/>
+                <field name="action"/>
+                <field name="description"/>
+                <field name="date"/>
+            </tree>
         </field>
     </record>
 </odoo>

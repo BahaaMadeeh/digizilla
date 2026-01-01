@@ -1,14 +1,13 @@
 /** @odoo-module **/
 
-import { FormController } from "@web/views/form/form_controller";
-import { patch } from "@web/core/utils/patch";
+import { patch } from 'web.utils';
+import ListController from 'web.ListController';
 
-patch(FormController.prototype, {
-    setup() {
-        super.setup(...arguments);
-        if (this.props.resModel === "digizilla.record") {
-            // This is the specific way to disable actions in v17
-            this.activeActions.create = false;
+patch(ListController.prototype, 'digizilla.hide_create_button', {
+    _updateButtons: function () {
+        this._super.apply(this, arguments);
+        if (this.modelName === 'digizilla.record') {
+            this.$buttons.find('.o_list_button_add').hide();
         }
     },
 });

@@ -25,7 +25,6 @@ class DigizillaRecord(models.Model):
         record = super(DigizillaRecord, self).create(vals)
         self.env['digizilla.log'].create({
             'name': f"Created record: {record.name}",
-            'user_id': self.env.user.id,
             'note': f"Record {record.name} was created.",
         })
         return record
@@ -44,7 +43,6 @@ class DigizillaRecord(models.Model):
         for record in self:
             self.env['digizilla.log'].create({
                 'name': f"Deleted record: {record.name}",
-                'user_id': self.env.user.id,
                 'note': f"Record {record.name} was deleted.",
             })
         return super(DigizillaRecord, self).unlink()

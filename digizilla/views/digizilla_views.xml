@@ -4,7 +4,7 @@
         <field name="name">digizilla.kanban</field>
         <field name="model">digizilla.record</field>
         <field name="arch" type="xml">
-            <kanban Create="false">
+            <kanban Create="true">
                 <field name="name"/>
                 <field name="gender"/>
                 <templates>
@@ -24,7 +24,7 @@
         <field name="name">digizilla.tree</field>
         <field name="model">digizilla.record</field>
         <field name="arch" type="xml">
-            <tree create = "false">
+            <tree create = "true">
                 <field name="name"/>
                 <field name="gender"/>
                 <field name="country_id"/>

@@ -10,3 +10,4 @@ class DigizillaLog(models.Model):
     description = fields.Text(string='Notes')
     record_id = fields.Many2one('digizilla.record', string="Record")
     action = fields.Char(string="Action")
+    note=fields.Char(string='Note',required = True)

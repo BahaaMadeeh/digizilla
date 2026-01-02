@@ -36,7 +36,6 @@ class DigizillaRecord(models.Model):
             changes = ", ".join(f"{k}={v}" for k,v in vals.items())
             self.env['digizilla.log'].create({
                 'name': f"Updated record: {record.name}",
-                'user_id': self.env.user.id,
                 'note': f"Record {record.name} updated: {changes}",
             })
         return res
